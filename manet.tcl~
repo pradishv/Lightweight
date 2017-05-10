@@ -1,0 +1,501 @@
+Phy/WirelessPhy set bandwidth_ 11Mb        ;#Data Rate
+Mac/802_11 set dataRate_ 11Mb              ;#Rate for Data Frames
+Mac/802_11 set basicRate_ 1Mb              ;#Rate for Control Frames
+
+set val(chan)   Channel/WirelessChannel    ;# channel type
+set val(prop)   Propagation/TwoRayGround   ;# radio-propagation model
+set val(netif)  Phy/WirelessPhy            ;# network interface type
+set val(mac)    Mac/802_11                 ;# MAC type
+set val(ifq)    Queue/DropTail/PriQueue    ;# interface queue type
+set val(ll)     LL                         ;# link layer type
+set val(ant)    Antenna/OmniAntenna        ;# antenna model
+set val(ifqlen) 50                         ;# max packet in ifq
+set val(nn)     50                         ;# number of mobilenodes
+set val(rp)     AODV                       ;# routing protocol
+set val(x)      1368                      ;# X dimension of topography
+set val(y)      639                      ;# Y dimension of topography
+set val(stop)   20.0                         ;# time of simulation end
+
+set ns [new Simulator]
+set topo       [new Topography]
+$topo load_flatgrid $val(x) $val(y)
+create-god $val(nn)
+set tracefile [open out.tr w]
+$ns trace-all $tracefile
+set namfile [open out.nam w]
+$ns namtrace-all $namfile
+$ns namtrace-all-wireless $namfile $val(x) $val(y)
+set chan [new $val(chan)];#Create wireless channel
+
+$ns node-config -adhocRouting  $val(rp) \
+                -llType        $val(ll) \
+                -macType       $val(mac) \
+                -ifqType       $val(ifq) \
+                -ifqLen        $val(ifqlen) \
+                -antType       $val(ant) \
+                -propType      $val(prop) \
+                -phyType       $val(netif) \
+                -channel       $chan \
+                -topoInstance  $topo \
+                -agentTrace    ON \
+                -routerTrace   ON \
+                -macTrace      ON \
+                -movementTrace ON
+
+set n(0) [$ns node]
+$n(0) set X_ 360
+$n(0) set Y_ 319
+$n(0) set Z_ 0.0
+$ns initial_node_pos $n(0) 20
+set n(1) [$ns node]
+$n(1) set X_ 445
+$n(1) set Y_ 475
+$n(1) set Z_ 0.0
+$ns initial_node_pos $n(1) 20
+set n(2) [$ns node]
+$n(2) set X_ 678
+$n(2) set Y_ 476
+$n(2) set Z_ 0.0
+$ns initial_node_pos $n(2) 20
+set n(3) [$ns node]
+$n(3) set X_ 887
+$n(3) set Y_ 437
+$n(3) set Z_ 0.0
+$ns initial_node_pos $n(3) 20
+set n(4) [$ns node]
+$n(4) set X_ 1070
+$n(4) set Y_ 336
+$n(4) set Z_ 0.0
+$ns initial_node_pos $n(4) 20
+set n(5) [$ns node]
+$n(5) set X_ 1137
+$n(5) set Y_ 163
+$n(5) set Z_ 0.0
+$ns initial_node_pos $n(5) 20
+set n(6) [$ns node]
+$n(6) set X_ 1153
+$n(6) set Y_ 36
+$n(6) set Z_ 0.0
+$ns initial_node_pos $n(6) 20
+set n(7) [$ns node]
+$n(7) set X_ 924
+$n(7) set Y_ 57
+$n(7) set Z_ 0.0
+$ns initial_node_pos $n(7) 20
+set n(8) [$ns node]
+$n(8) set X_ 805
+$n(8) set Y_ 201
+$n(8) set Z_ 0.0
+$ns initial_node_pos $n(8) 20
+set n(9) [$ns node]
+$n(9) set X_ 1029
+$n(9) set Y_ 496
+$n(9) set Z_ 0.0
+$ns initial_node_pos $n(9) 20
+set n(10) [$ns node]
+$n(10) set X_ 1029
+$n(10) set Y_ 496
+$n(10) set Z_ 0.0
+$ns initial_node_pos $n(10) 20
+set n(11) [$ns node]
+$n(11) set X_ 742
+$n(11) set Y_ 521
+$n(11) set Z_ 0.0
+$ns initial_node_pos $n(11) 20
+set n(12) [$ns node]
+$n(12) set X_ 607
+$n(12) set Y_ 288
+$n(12) set Z_ 0.0
+$ns initial_node_pos $n(12) 20
+set n(13) [$ns node]
+$n(13) set X_ 550
+$n(13) set Y_ 123
+$n(13) set Z_ 0.0
+$ns initial_node_pos $n(13) 20
+set n(14) [$ns node]
+$n(14) set X_ 419
+$n(14) set Y_ 63
+$n(14) set Z_ 0.0
+$ns initial_node_pos $n(14) 20
+set n(15) [$ns node]
+$n(15) set X_ 264
+$n(15) set Y_ 54
+$n(15) set Z_ 0.0
+$ns initial_node_pos $n(15) 20
+set n(16) [$ns node]
+$n(16) set X_ 84
+$n(16) set Y_ 51
+$n(16) set Z_ 0.0
+$ns initial_node_pos $n(16) 20
+set n(17) [$ns node]
+$n(17) set X_ 47
+$n(17) set Y_ 151
+$n(17) set Z_ 0.0
+$ns initial_node_pos $n(17) 20
+set n(18) [$ns node]
+$n(18) set X_ 30
+$n(18) set Y_ 360
+$n(18) set Z_ 0.0
+$ns initial_node_pos $n(18) 20
+set n(19) [$ns node]
+$n(19) set X_ 34
+$n(19) set Y_ 510
+$n(19) set Z_ 0.0
+$ns initial_node_pos $n(19) 20
+set n(20) [$ns node]
+$n(20) set X_ 120
+$n(20) set Y_ 525
+$n(20) set Z_ 0.0
+$ns initial_node_pos $n(20) 20
+set n(21) [$ns node]
+$n(21) set X_ 317
+$n(21) set Y_ 527
+$n(21) set Z_ 0.0
+$ns initial_node_pos $n(21) 20
+set n(22) [$ns node]
+$n(22) set X_ 187
+$n(22) set Y_ 340
+$n(22) set Z_ 0.0
+$ns initial_node_pos $n(22) 20
+set n(23) [$ns node]
+$n(23) set X_ 266
+$n(23) set Y_ 192
+$n(23) set Z_ 0.0
+$ns initial_node_pos $n(23) 20
+set n(24) [$ns node]
+$n(24) set X_ 491
+$n(24) set Y_ 361
+$n(24) set Z_ 0.0
+$ns initial_node_pos $n(24) 20
+set n(25) [$ns node]
+$n(25) set X_ 424
+$n(25) set Y_ 146
+$n(25) set Z_ 0.0
+$ns initial_node_pos $n(25) 20
+set n(26) [$ns node]
+$n(26) set X_ 701
+$n(26) set Y_ 77
+$n(26) set Z_ 0.0
+$ns initial_node_pos $n(26) 20
+set n(27) [$ns node]
+$n(27) set X_ 528
+$n(27) set Y_ 14
+$n(27) set Z_ 0.0
+$ns initial_node_pos $n(27) 20
+set n(28) [$ns node]
+$n(28) set X_ 813
+$n(28) set Y_ 17
+$n(28) set Z_ 0.0
+$ns initial_node_pos $n(28) 20
+set n(29) [$ns node]
+$n(29) set X_ 939
+$n(29) set Y_ 290
+$n(29) set Z_ 0.0
+$ns initial_node_pos $n(29) 20
+set n(30) [$ns node]
+$n(30) set X_ 530
+$n(30) set Y_ 536
+$n(30) set Z_ 0.0
+$ns initial_node_pos $n(30) 20
+set n(31) [$ns node]
+$n(31) set X_ 915
+$n(31) set Y_ 532
+$n(31) set Z_ 0.0
+$ns initial_node_pos $n(31) 20
+set n(32) [$ns node]
+$n(32) set X_ 1184
+$n(32) set Y_ 539
+$n(32) set Z_ 0.0
+$ns initial_node_pos $n(32) 20
+set n(33) [$ns node]
+$n(33) set X_ 1268
+$n(33) set Y_ 429
+$n(33) set Z_ 0.0
+$ns initial_node_pos $n(33) 20
+set n(34) [$ns node]
+$n(34) set X_ 1257
+$n(34) set Y_ 252
+$n(34) set Z_ 0.0
+$ns initial_node_pos $n(34) 20
+set n(35) [$ns node]
+$n(35) set X_ 1260
+$n(35) set Y_ 57
+$n(35) set Z_ 0.0
+$ns initial_node_pos $n(35) 20
+set n(36) [$ns node]
+$n(36) set X_ 973
+$n(36) set Y_ 174
+$n(36) set Z_ 0.0
+$ns initial_node_pos $n(36) 20
+set n(37) [$ns node]
+$n(37) set X_ 146
+$n(37) set Y_ 217
+$n(37) set Z_ 0.0
+$ns initial_node_pos $n(37) 20
+set n(38) [$ns node]
+$n(38) set X_ 214
+$n(38) set Y_ 468
+$n(38) set Z_ 0.0
+$ns initial_node_pos $n(38) 20
+set n(39) [$ns node]
+$n(39) set X_ 726
+$n(39) set Y_ 375
+$n(39) set Z_ 0.0
+$ns initial_node_pos $n(39) 20
+set n(40) [$ns node]
+$n(40) set X_ 675
+$n(40) set Y_ 171
+$n(40) set Z_ 0.0
+$ns initial_node_pos $n(40) 20
+set n(41) [$ns node]
+$n(41) set X_ 138
+$n(41) set Y_ 5
+$n(41) set Z_ 0.0
+$ns initial_node_pos $n(41) 20
+set n(42) [$ns node]
+$n(42) set X_ 459
+$n(42) set Y_ 240
+$n(42) set Z_ 0.0
+$ns initial_node_pos $n(42) 20
+set n(43) [$ns node]
+$n(43) set X_ 1155
+$n(43) set Y_ 453
+$n(43) set Z_ 0.0
+$ns initial_node_pos $n(43) 20
+set n(44) [$ns node]
+$n(44) set X_ 1161
+$n(44) set Y_ 237
+$n(44) set Z_ 0.0
+$ns initial_node_pos $n(44) 20
+set n(45) [$ns node]
+$n(45) set X_ 1045
+$n(45) set Y_ 24
+$n(45) set Z_ 0.0
+$ns initial_node_pos $n(45) 20
+set n(46) [$ns node]
+$n(46) set X_ 829
+$n(46) set Y_ 321
+$n(46) set Z_ 0.0
+$ns initial_node_pos $n(46) 20
+set n(47) [$ns node]
+$n(47) set X_ 601
+$n(47) set Y_ 405
+$n(47) set Z_ 0.0
+$ns initial_node_pos $n(47) 20
+set n(48) [$ns node]
+$n(48) set X_ 721
+$n(48) set Y_ 254
+$n(48) set Z_ 0.0
+$ns initial_node_pos $n(48) 20
+set n(49) [$ns node]
+$n(49) set X_ 94
+$n(49) set Y_ 302
+$n(49) set Z_ 0.0
+$ns initial_node_pos $n(49) 20
+set j 0
+for {set i 1} {$i<$val(stop)} {incr i} {
+	set j [expr $i+100]	
+	set k [expr $j+500]
+ 	$ns at $i "$n(2) setdest $k $j 50"
+	$ns at $i "$n(41) setdest $j $k 50"
+	$ns at $i "$n(39) setdest $k $j 50"
+	$ns at $i "$n(5) setdest $j $k 50"
+	$ns at $i "$n(11) setdest $k $j 50"
+	$ns at $i "$n(18) setdest $j $k 50"
+	$ns at $i "$n(48) setdest $k $j 50"
+	set j 0
+	set k 0
+}
+set tcp0 [new Agent/TCP]
+$ns attach-agent $n(18) $tcp0
+set sink1 [new Agent/TCPSink]
+$ns attach-agent $n(34) $sink1
+$ns connect $tcp0 $sink1
+$tcp0 set packetSize_ 1500
+set tcp2 [new Agent/TCP]
+set sink3 [new Agent/TCPSink]
+$tcp2 set packetSize_ 1500
+
+$ns at 0.1 "$n(18) add-mark N2 blue circle"
+$ns at 0.1 "$n(18) label Source"
+$ns at 0.1 "$n(34) add-mark N2 blue circle"
+$ns at 0.1 "$n(34) label Destination"
+set x 0
+for {set i 2} {$i < 7} {incr i} {
+	set x [expr $x+1]
+	set j [expr $i+10]
+	set k [expr $i+2]
+	$n($i) color "red"
+	$ns at [expr $i] "$n($i) color red"
+	if {$i==2 ||$i==3 ||$i==4 ||$i==5 ||$i==6} {
+	$ns at $i "$n($i) label DEFENDER"
+	set ar($x) $i	
+	}
+	puts "\n $x==$ar($x)"
+	set tcp($i) [new Agent/TCP]
+	$ns attach-agent $n($i) $tcp($i)	
+	set udp($i) [new Agent/UDP]
+	$ns attach-agent $n($i) $udp($i)
+
+	set sink($j) [new Agent/TCPSink]
+	$ns attach-agent $n($j) $sink($j)
+	$ns connect $tcp($i) $sink($j)
+	$tcp($i) set packetSize_ 1500
+	
+	set null($j) [new Agent/Null]
+	$ns attach-agent $n($j) $null($j)
+	$ns connect $udp($i) $null($j)
+	$udp($i) set packetSize_ 1500
+
+	set cbr($i) [new Application/Traffic/CBR]
+	$cbr($i) attach-agent $tcp($i)
+	$cbr($i) attach-agent $udp($i)
+	$cbr($i) set packetSize_ 1000
+	$cbr($i) set rate_ 1.0Mb
+	$cbr($i) set random_ null
+	$ns at $i "$cbr($i) start"
+	$ns at $k "$cbr($i) stop"
+	if {$i>8} {
+	$ns at 8.0 "$udp($i) reset"
+	$ns at 8.0 "$null($j) reset"
+	}
+}
+
+set ra 0
+set nbr [open Neighbor w]
+puts $nbr "Node\tNode\tDistance"
+for {set i 0} {$i<$val(nn)} {incr i} {
+for {set j 0} {$j<$val(nn)} {incr j} {
+set x1 [expr int([ $n($i) set X_])]
+set y1 [expr int([$n($i) set Y_])]
+set x2 [expr int([$n($j) set X_])]
+set y2 [expr int([$n($j) set Y_])]
+set d [expr int(sqrt(pow(($x2-$x1),2)+pow(($y2-$y1),2)))]
+if {$i!=$j} {
+puts $nbr "$i\t$j\t$d"
+}
+set val(pt) 2
+set val(gr) 1
+set val(gt) 1
+set val(l)  1
+set lam [expr (9*100000000*100000000)/(2.472)]
+set nr [expr ($val(pt)*$val(gr)*$val(gt)*$lam)]
+set dr [expr (157*$val(l)*$d*$d)]
+if {$dr!=0} {
+set pr [expr ($nr/$dr)] 
+if {$i!=$j} {
+if {$pr!=0 && $pr>2.472} {
+Antenna/OmniAntenna set Gt_ 2              ;#Transmit antenna gain
+Antenna/OmniAntenna set Gr_ 2              ;#Receive antenna gain
+Phy/WirelessPhy set L_ 2.0                 ;#System Loss Factor
+Phy/WirelessPhy set freq_ 2.472e9          ;#channel
+Phy/WirelessPhy set CSThresh_ 2.78831e-10# ;#Carrier Sense Power
+
+if {$i==$ar($x)} {
+$n([expr $i+1]) color "yellow"
+$ns at [expr $i+1] "$n([expr $i+1]) color yellow"
+$ns at [expr $i+1] "$n([expr $i+1]) add-mark N2 yellow hexagon"
+$ns at [expr $i+1] "$n([expr $i+1]) label $n([expr $i+1])/[expr $ra+1]"
+$ns attach-agent $n(18) $tcp0
+
+}
+}
+
+if {$pr!=0&& $pr<2.472} {
+Antenna/OmniAntenna set Gt_ 0.5              ;#Transmit antenna gain
+Antenna/OmniAntenna set Gr_ 0.5              ;#Receive antenna gain
+Phy/WirelessPhy set L_ 0.5                 ;#System Loss Factor
+Phy/WirelessPhy set freq_ 2.472e9          ;#channel
+Phy/WirelessPhy set CSThresh_ 2.78831e-14# ;#Carrier Sense Power
+$ns attach-agent $n($j) $sink1
+}
+}
+}
+}
+}
+
+set cbr0 [new Application/Traffic/CBR]
+$cbr0 attach-agent $tcp0
+$cbr0 set packetSize_ 1000
+$cbr0 set rate_ 2.0Mb
+$cbr0 set random_ null
+$ns at 1.0 "$cbr0 start"
+$ns at 20.0 "$cbr0 stop"
+set s [$sink1 set bytes_]
+puts "$s"
+set t [open throughput w]
+puts $t "XUnitText: time(s) \nYUnitText: datarate \nTitleText: Throughput \nDevice: PostScript \nBoundBox: true \nTicks: true \nMarkers: true\n"	
+set fr [open edr w]
+puts $fr "XUnitText: Encoded \nYUnitText: Decoded\n TitleText: EDR \nDevice: PostScript \nBoundBox: true \nTicks: true \nMarkers: true\n"
+set tx [open tx w]
+puts $tx "XUnitText: time(s) \nYUnitText: No. of Transmissions\nTitleText: Transmissions \nDevice: PostScript \nBoundBox: true \nTicks: true \nMarkers: true\n"
+set req 0
+set c1 0
+set d1 0
+proc bpenc {} {
+global sink1 tcp0 c1 d1 t fr tx req
+ set ns [Simulator instance]
+    set time 0.1 ;
+        set r1 [$sink1 set bytes_]
+    	set now [$ns now]
+	if {$r1!=0} {
+	puts $t "$now \t [expr $r1/$time*8/1000000]"
+	}
+	if {$r1 != 0} {
+	set c1 [expr $c1+1]
+	}
+	if {$r1 ==0} {
+	set d1 [expr $d1-1]	
+	}
+	if {$r1 != 0} {
+	set d1 [expr $d1+1]
+	}
+	if {$r1 != 0} {
+	set req [expr $req+1]	
+	}
+	if {$r1==0} {
+	set req [expr $req-1]
+	}
+	if {$req>0} {	
+	puts $tx "$now \t $req"
+	}
+	if {$d1<0} {
+	set d1 0	
+	}
+	if {$c1!=0} {
+	puts $fr "$c1 \t $d1"	
+	}
+	$ns at $now "$ns trace-annotate \"Encoded chunks: $c1 | Decoded chunks: $d1\""        
+	$sink1 set bytes_ 0
+    	$ns at [expr $now+$time] "bpenc"   ;
+	return $c1
+}
+$ns at 0.9 "bpenc"
+
+
+proc finish {} {
+    global ns tracefile namfile
+    $ns flush-trace
+    close $tracefile
+    close $namfile
+    exec ./nam out.nam &
+exec xgraph RSS1.xg RSS2.xg RSS3.xg -t "RSS Vs TIME" -x "time" -y "rss value in dbm" &
+exec xgraph RSSrecoreded1.xg RSSrecoreded2.xg RSSrecoreded3.xg -t "RSS recoreded at node Vs TIME" -x "time" -y "rss value in dbm" &
+exec xgraph normalmovement.xg -t " normal movement of a node" -x "time" -y "rss value in dbm" &
+exec xgraph nodemovement.xg -t " node movement of same speed" -x "time" -y "rss value in dbm" &
+exec xgraph nodemovementd.xg -t " node movement of different speed" -x "time" -y "rss value in dbm" &
+exec xgraph oid.xg wid.xg -t " distinction" -x "time" -y "rss value in dbm" &
+exec xgraph connection1.xg connection2.xg  connection3.xg -t " connection vs speed" -x "max speed" -y "data packets in mpbs" &
+exec xgraph tr1.xg tr2.xg  tr3.xg -t " transmission rate vs speed" -x "max speed" -y "data packets in mpbs" &
+exec xgraph withmaliciousdrop.xg withoutmaliciousdrop.xg -t " drop" -x "time" -y "data packets in mpbs" &
+exec xgraph withmaliciouspdr.xg withoutmaliciouspdr.xg -t " pdr" -x "time" -y "data packets in mpbs" &
+exec xgraph withmaliciousthroughput.xg withoutmaliciousthroughput.xg -t " throughput" -x "time" -y "data packets in mpbs" &
+exit 0
+}
+for {set i 0} {$i < $val(nn) } { incr i } {
+    $ns at $val(stop) "\$n($i) reset"
+}
+$ns at $val(stop) "$ns nam-end-wireless $val(stop)"
+$ns at $val(stop) "finish"
+$ns at $val(stop) "puts \"done\" ; $ns halt"
+$ns run

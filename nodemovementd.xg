@@ -1,0 +1,27 @@
+Markers: true
+BoundBox: true
+Background: grey
+LabelFont: Monospace
+TitleFont: Monospace
+Ticks: true
+NoLines: false
+10 100
+10 98
+20 97
+25 95
+35 94
+36 90
+40 86
+45 70
+49 75
+55 55
+65 51
+75 10
+85 10
+95 10
+95  10
+95  10
+100  10
+
+
+
